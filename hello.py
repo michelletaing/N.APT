@@ -7,13 +7,15 @@ pygame.init()
 width, height = 1280, 720
 window = pygame.display.set_mode((width, height))
 
-# Set images
+# SET IMAGES
 thumbnail_nick = pygame.image.load('assets/thumbnail_nick.png').convert()
 thumbnail_nick = pygame.transform.scale(thumbnail_nick, (width,height))
 
+# Clickable object
 test_obj = pygame.image.load('assets/drawer.png').convert()
 test_obj = pygame.transform.scale(test_obj, (163,150))
-test_rect = test_obj.get_rect()
+test_rect = test_obj.get_rect() # Get bounds of an image
+test_rect.topleft = (293, 405) # Set its top left to its position on the canvas
 
 def draw_window():
     window.blit(thumbnail_nick, (0, 0))
@@ -27,10 +29,8 @@ def main():
             if event.type == QUIT:
                 run = False
 
-        mouse_pos = pygame.mouse.get_pos()
-        
         if pygame.mouse.get_pressed()[0]:
-            print(mouse_pos)
+            mouse_pos = pygame.mouse.get_pos()
             if (test_rect.collidepoint(mouse_pos)):
                 print("bruh")
 
