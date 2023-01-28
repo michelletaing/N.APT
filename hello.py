@@ -5,11 +5,11 @@ pygame.init()
 
 #defining size of game window
 windowsSize = pygame.display.set_mode((800,600)) 
-pygame.display.set_caption("Hello World Printer")
+pygame.display.set_caption("Hello Blop Printer")
 
 #defining font attributes
 myFont = pygame.font.SysFont("Segoe UI", 90)
-helloWorld = myFont.render("Hello World", 1, (255, 0, 255), (255, 255, 255))
+helloWorld = myFont.render("Hello Blop!", 1, (255, 0, 255), (255, 255, 255))
 
 while 1:
     for event in pygame.event.get():
