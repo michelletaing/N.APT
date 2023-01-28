@@ -6,20 +6,39 @@ pygame.init()
 # Set dimensions
 width, height = 1280, 720
 window = pygame.display.set_mode((width, height))
+pygame.display.set_caption("nick's apartment")
 
 # SET IMAGES
-thumbnail_nick = pygame.image.load('assets/thumbnail_nick.png').convert()
-thumbnail_nick = pygame.transform.scale(thumbnail_nick, (width,height))
+bg = pygame.image.load('assets/BACKGROUND.png').convert_alpha()
+air = pygame.image.load('assets/air.png').convert_alpha()
+cabinet = pygame.image.load('assets/cabinet.png').convert_alpha()
+couch = pygame.image.load('assets/couch.png').convert_alpha()
+kitchen = pygame.image.load('assets/kitchen.png').convert_alpha()
+lamp = pygame.image.load('assets/lamp.png').convert_alpha()
+poster = pygame.image.load('assets/poster.png').convert_alpha()
+small_table = pygame.image.load('assets/small_table.png').convert_alpha()
+table = pygame.image.load('assets/table.png').convert_alpha()
+trash = pygame.image.load('assets/trash.png').convert_alpha()
+window_drawing = pygame.image.load('assets/window.png').convert_alpha()
+gradient = pygame.image.load('assets/gradient.png').convert_alpha()
 
-# Clickable object
-test_obj = pygame.image.load('assets/drawer.png').convert()
-test_obj = pygame.transform.scale(test_obj, (163,150))
-test_rect = test_obj.get_rect() # Get bounds of an image
-test_rect.topleft = (293, 405) # Set its top left to its position on the canvas
+# SET RECT BOUNDS
+air_rect = air.get_rect();
+air_rect.topleft = (10, 517)
 
-def draw_window():
-    window.blit(thumbnail_nick, (0, 0))
-    window.blit(test_obj, (293, 405))
+def render():
+    window.blit(bg, (0,0))
+    window.blit(air, (0,0))
+    window.blit(cabinet, (0,0))
+    window.blit(couch, (0,0))
+    window.blit(kitchen, (0,0))
+    window.blit(lamp, (0,0))
+    window.blit(poster, (0,0))
+    window.blit(small_table, (0,0))
+    window.blit(table, (0,0))
+    window.blit(trash, (0,0))
+    window.blit(window_drawing, (0,0))
+    window.blit(gradient, (0,0))
     pygame.display.update()
 
 def main():
@@ -31,10 +50,10 @@ def main():
 
         if pygame.mouse.get_pressed()[0]:
             mouse_pos = pygame.mouse.get_pos()
-            if (test_rect.collidepoint(mouse_pos)):
+            if (air_rect.collidepoint(mouse_pos)):
                 print("bruh")
 
-        draw_window()
+        render()
         
     pygame.quit()
 
