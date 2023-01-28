@@ -9,7 +9,7 @@ pygame.display.set_caption("Hello World Printer")
 
 #defining font attributes
 myFont = pygame.font.SysFont("Segoe UI", 90)
-helloWorld = myFont.render("Hello World", 1, (255, 0, 255), (255, 255, 255))
+helloWorld = myFont.render("Hello Worldo", 1, (255, 0, 255), (255, 255, 255))
 
 while 1:
     for event in pygame.event.get():
