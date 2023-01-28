@@ -1,10 +1,10 @@
 **when you are ready to push your changes to your branch:**
 
-`git add hello.py`
+`git add hello.py`: stages your files
 
-`git commit -m “message”`
+`git commit -m “message”`: commits the files and provides a descriptive message 
 
-`git push origin your-branch`
+`git push origin your-branch`: pushes to your branch
 
 ********to update your local repo with the remote repo:********
 
