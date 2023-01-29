@@ -25,7 +25,10 @@ textMenu = pygame.image.load('assets/text_menu.png').convert_alpha()
 
 # SET RECT BOUNDS
 air_rect = air.get_rect();
-air_rect.topleft = (10, 517)
+air_rect.topleft = (2, 486)
+air_rect.width = 170
+air_rect.height = 140
+# air_rect.width
 
 # FONT
 Font = pygame.font.Font('assets/ComicSansMS3.ttf', 40)
