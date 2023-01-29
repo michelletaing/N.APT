@@ -9,112 +9,90 @@ width, height = 1280, 720
 window = pygame.display.set_mode((width, height))
 pygame.display.set_caption("nick's apartment")
 
-# SET IMAGES
-# arrows
-arrow_left = pygame.image.load(f'assets/arrow_left.png').convert_alpha()
-left_rect = arrow_left.get_rect()
-left_rect.topleft = (83,87)
+# LOAD IMAGES & SET BOOLS
+tv_view = pygame.image.load('assets/tv_view.png').convert_alpha()
+tv_status = True
 
-arrow_right = pygame.image.load(f'assets/arrow_right.png').convert_alpha()
-right_rect = arrow_right.get_rect()
-right_rect.topleft = (1089, 343)
+couch_view = pygame.image.load('assets/couch_view.png').convert_alpha()
+couch_status = False
 
-# initialize views lists and load tv_view images
-tv_view = []
-for i in range(1,11):
-    tv_view.append(pygame.image.load(f'assets/tv_view/{i}.png').convert_alpha())
+window_view = pygame.image.load('assets/window_view.png').convert_alpha()
+window_status = False
 
-couch_view = []
-#or i in range(1,13):
-    #couch_view.append(pygame.image.load(f'assets/couch_view/{i}.png').convert_alpha()) 
+kitchen_view = pygame.image.load('assets/kitchen_view.png').convert_alpha()
+kitchen_status = False
 
-window_view = []
-#for i in range(1,6):
-    #window_view.append(pygame.image.load(f'assets/window_view/{i}.png').convert_alpha()) 
+hand = pygame.image.load('assets/HAND.png').convert_alpha()
 
-kitchen_view = []
-#for i in range(1,10):
-    #couch_view.append(pygame.image.load(f'assets/kitchen_view/{i}.png').convert_alpha()) 
+# ARROWS
+left_arrow_left = 80
+left_arrow_right = 197
+right_arrow_left = 1084
+right_arrow_right = 1215
+top = 340
+bottom = 433
 
-def toggle_view(images, turnOn):
-    window.fill((0,0,0))
-    if turnOn:
-        for i in range(len(images)):
-            if images[i] is not None:
-                window.blit(images[i], (0,0))
-    if not turnOn:
-        for i in range(len(images)):
-            images[i] = None       
+def toggle_view():
+    if tv_status == True:
+        window.blit(tv_view, (0,0))
+    if couch_status == True:
+        window.blit(couch_view, (0,0))
+    if window_status == True:
+        window.blit(window_view, (0,0))  
+    if kitchen_status == True:
+        window.blit(kitchen_view, (0,0)) 
 
-def switch_views(event):
-    if window_view is not None:
+def switch_screen(event):
+    global tv_status
+    global couch_status
+    global kitchen_status
+    global window_status
+
+    if tv_status == True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = event.pos
-            if left_rect.collidepoint(mouse_pos):
-                toggle_view(window_view, False)
-                # Reload the images
-                for i in range(1,11):
-                    tv_view.append(pygame.image.load(f'assets/tv_view/{i}.png').convert_alpha()) 
-                toggle_view(tv_view, True)
-            if right_rect.collidepoint(mouse_pos):
-                toggle_view(window_view, False)
-                for i in range(1,13):
-                    couch_view.append(pygame.image.load(f'assets/couch_view/{i}.png').convert_alpha()) 
-                toggle_view(couch_view, True)
+            if left_arrow_left <= mouse_pos[0] <= left_arrow_right and top <= mouse_pos[1] <= bottom:
+                tv_status = False
+                kitchen_status = True
+            if right_arrow_left <= mouse_pos[0] <= right_arrow_right and top <= mouse_pos[1] <= bottom:
+                tv_status = False
+                window_status = True
     
-    if tv_view is not None:
+    elif window_status == True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = event.pos
-            if left_rect.collidepoint(mouse_pos):
-                toggle_view(tv_view, False)
-                for i in range(1,10):
-                    couch_view.append(pygame.image.load(f'assets/kitchen_view/{i}.png').convert_alpha()) 
-                toggle_view(kitchen_view, True)
-            if right_rect.collidepoint(mouse_pos):
-                toggle_view(tv_view, False)
-                for i in range(1,6):
-                    window_view.append(pygame.image.load(f'assets/window_view/{i}.png').convert_alpha()) 
-                toggle_view(window_view, True)
-    
-    if couch_view is not None:
+            if left_arrow_left <= mouse_pos[0] <= left_arrow_right and top <= mouse_pos[1] <= bottom:
+                window_status = False
+                tv_status = True
+            if right_arrow_left <= mouse_pos[0] <= right_arrow_right and top <= mouse_pos[1] <= bottom:
+                window_status = False
+                couch_status = True
+
+    elif couch_status == True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = event.pos
-            if left_rect.collidepoint(mouse_pos):
-                toggle_view(couch_view, False)
-                for i in range(1,6):
-                    window_view.append(pygame.image.load(f'assets/window_view/{i}.png').convert_alpha()) 
-                toggle_view(window_view, True)
-            if right_rect.collidepoint(mouse_pos):
-                toggle_view(couch_view, False)
-                for i in range(1,10):
-                    couch_view.append(pygame.image.load(f'assets/kitchen_view/{i}.png').convert_alpha()) 
-                toggle_view(kitchen_view, True)
+            if left_arrow_left <= mouse_pos[0] <= left_arrow_right and top <= mouse_pos[1] <= bottom:
+                couch_status = False
+                window_status = True
+            if right_arrow_left <= mouse_pos[0] <= right_arrow_right and top <= mouse_pos[1] <= bottom:
+                couch_status = False
+                kitchen_status = True
 
-
-    if kitchen_view is not None:
+    elif kitchen_status == True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = event.pos
-            if left_rect.collidepoint(mouse_pos):
-                toggle_view(kitchen_view, False)
-                for i in range(1,13):
-                    couch_view.append(pygame.image.load(f'assets/couch_view/{i}.png').convert_alpha()) 
-                toggle_view(couch_view, True)
-            elif right_rect.collidepoint(mouse_pos):
-                toggle_view(kitchen_view, False)
-                for i in range(1,11):
-                    tv_view.append(pygame.image.load(f'assets/tv_view/{i}.png').convert_alpha()) 
-                toggle_view(tv_view, True)
+            if left_arrow_left <= mouse_pos[0] <= left_arrow_right and top <= mouse_pos[1] <= bottom:
+                print("poop")
+                kitchen_status = False
+                couch_status = True
+            if right_arrow_left <= mouse_pos[0] <= right_arrow_right and top <= mouse_pos[1] <= bottom:
+                kitchen_status = False
+                tv_status = True   
     
-    pygame.display.flip()
-
-
-def render():
-    for image in tv_view:
-        if image is not None:
-            window.blit(image, (0,0))
-    
-    window.blit(arrow_left, (0,0))
-    window.blit(arrow_right, (0,0))
+def render(event):
+    switch_screen(event)
+    toggle_view()
+    window.blit(hand, (0,0))
     pygame.display.update()
 
 def main():
@@ -124,9 +102,7 @@ def main():
             if event.type == QUIT:
                 run = False
             
-            switch_views(event)
-
-        render()
+            render(event)
 
     pygame.quit()
 
