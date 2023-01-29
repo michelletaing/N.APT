@@ -28,7 +28,7 @@ while True:  ### remove this and put the rest under actual while loop
                 code += code_inp
                 count += 1
             if 530 <= mouse[0] <= 570 and 440 <= mouse[1] <= 480:  # check mark (enter) button ###
-                if count >= 4 and code != "1234":  # change 1234 to desired code
+                if code != "1234":  # change 1234 to desired code
                     code = "wrong"
                     display = smallfont.render(f"{code}", True, color)
                     window.blit(display, (490, 250))
@@ -82,6 +82,14 @@ while True:  ### remove this and put the rest under actual while loop
                 code_inp = "9"
                 code += code_inp
                 count += 1
+            if count >= 4 and code != "1234" and code != "correct":  # change 1234 to desired code
+                code = "wrong"
+                display = smallfont.render(f"{code}", True, color)
+                window.blit(display, (490, 250))
+                pygame.display.update()
+                time.sleep(1)
+                count = 0
+                code = ""
             display = smallfont.render(f"{code}", True, color)  ###
     mouse = pygame.mouse.get_pos()
     window.blit(display, (490, 250))  ### NEED WINDOW VARIABLE
